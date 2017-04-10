@@ -1,98 +1,145 @@
 package com.example.thelong0705.drumpad;
 
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btDo;
-    private Button btRe;
-    private Button btMi;
-    private Button btFa;
-    private Button btSon;
-    private Button btLa;
-    private Button btSi;
-    final MediaPlayer mp = new MediaPlayer();
+    public class PressedKeyInfo {
+        private ImageView ivKey;
+        private int pointerId;
+
+        public ImageView getIvKey() {
+            return ivKey;
+        }
+
+        public int getPointerId() {
+            return pointerId;
+        }
+
+        public PressedKeyInfo(ImageView ivKey, int pointerId) {
+            this.ivKey = ivKey;
+            this.pointerId = pointerId;
+        }
+    }
+
+    private List<ImageView> ivKeys;
+    private List<PressedKeyInfo> pressedKeyInfos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        btDo=(Button) findViewById(R.id.btDo);
-        btRe=(Button) findViewById(R.id.btRe);
-        btMi=(Button) findViewById(R.id.btMi);
-        btFa=(Button) findViewById(R.id.btFa);
-        btSon=(Button) findViewById(R.id.btSon);
-        btLa=(Button) findViewById(R.id.btLa);
-        btSi=(Button) findViewById(R.id.btSi);
-        btDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("do.wav");
-            }
-        });
-        btRe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("re.wav");
-            }
-        });
-        btMi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("mi.wav");
-            }
-        });
-        btFa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("fa.wav");
-            }
-        });
-        btSon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("son.wav");
-            }
-        });
-        btLa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("la.wav");
-            }
-        });
-        btSi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound("si.wav");
-            }
-        });
-    }
-
-    private void playSound(String soundName)
-    {
-        if(mp.isPlaying())
-        {
-            mp.stop();
-        }
-
-        try {
-            mp.reset();
-            AssetFileDescriptor afd;
-            afd = getAssets().openFd(soundName);
-            mp.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-            mp.prepare();
-            mp.start();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ivKeys = new ArrayList<>();
+        ivKeys.add((ImageView) findViewById(R.id.key_1));
+        ivKeys.add((ImageView) findViewById(R.id.key_2));
+        ivKeys.add((ImageView) findViewById(R.id.key_3));
+        ivKeys.add((ImageView) findViewById(R.id.key_4));
+        ivKeys.add((ImageView) findViewById(R.id.key_5));
+        ivKeys.add((ImageView) findViewById(R.id.key_6));
+        ivKeys.add((ImageView) findViewById(R.id.key_7));
+        ivKeys.add((ImageView) findViewById(R.id.key_8));
+        ivKeys.add((ImageView) findViewById(R.id.key_9));
+        ivKeys.add((ImageView) findViewById(R.id.key_10));
+        ivKeys.add((ImageView) findViewById(R.id.key_11));
+        ivKeys.add((ImageView) findViewById(R.id.key_12));
+        pressedKeyInfos = new ArrayList<>();
 
     }
+
+    public boolean onTouchEvent(MotionEvent event) {
+
+        int pointerIndex = MotionEventCompat.getActionIndex(event);
+        int pointerId = event.getPointerId(pointerIndex);
+        float pointerX = event.getX(pointerIndex);
+        float pointerY = event.getY(pointerIndex);
+        int pointerAction = event.getActionMasked();
+        ImageView pressedKey = findPressedKey(pointerX, pointerY);
+        if (pointerAction == MotionEvent.ACTION_MOVE) {
+            for (int i = 0; i < pressedKeyInfos.size(); i++) {
+                PressedKeyInfo pressedKeyInfo = pressedKeyInfos.get(i);
+                if (pressedKeyInfo.getPointerId() == pointerId
+                        && !isInside(pointerX, pointerY, pressedKeyInfo.getIvKey())) {
+                    pressedKeyInfos.remove(i);
+                    setPressed(pressedKeyInfo.getIvKey(), false);
+                }
+            }
+        }
+        if (pressedKey != null) {
+            if (pointerAction == MotionEvent.ACTION_DOWN
+                    || pointerAction == MotionEvent.ACTION_POINTER_DOWN || pointerAction == MotionEvent.ACTION_MOVE) {
+                if (!containsKeyInfoWith(pressedKey)) {
+                    pressedKeyInfos.add(new PressedKeyInfo(pressedKey, pointerId));
+
+                }
+                setPressed(pressedKey, true);
+            }
+            if (pointerAction == MotionEvent.ACTION_POINTER_UP || pointerAction == MotionEvent.ACTION_UP) {
+                for (int i = 0; i < pressedKeyInfos.size(); i++) {
+                    PressedKeyInfo pressedKeyInfo = pressedKeyInfos.get(i);
+                    if (pressedKeyInfo.getPointerId() == pointerId)
+                        pressedKeyInfos.remove(i);
+                    setPressed(pressedKey, false);
+                }
+            }
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private boolean isInside(float pointerX, float pointerY, View v) {
+        int[] location = new int[2];
+        v.getLocationOnScreen(location);
+        int left = location[0];
+        int top = location[1];
+        int right = left + v.getWidth();
+        int bottom = top + v.getHeight();
+        return pointerX > left && pointerX < right
+                && pointerY > top && pointerY < bottom;
+    }
+
+    private void setPressed(ImageView view, boolean isPressed) {
+        if (isPressed) {
+            if (ivKeys.contains(view)) {
+                view.setBackgroundColor(Color.GREEN);
+            }
+        } else {
+            view.setBackgroundColor(Color.BLUE);
+        }
+    }
+
+    private ImageView findPressedKey(float pointerX, float pointerY) {
+
+        for (int i = 0; i < ivKeys.size(); i++) {
+            if (isInside(pointerX, pointerY, ivKeys.get(i))) {
+                return ivKeys.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    private boolean containsKeyInfoWith(ImageView imageView) {
+        for (PressedKeyInfo pressedKeyInfo : pressedKeyInfos) {
+            if (pressedKeyInfo.getIvKey() == imageView)
+                return true;
+        }
+        return false;
+    }
+
 }
+
+
