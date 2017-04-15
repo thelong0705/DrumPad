@@ -4,166 +4,213 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.thelong0705.drumpad.MainActivity">
-
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
 
-        android:layout_width="0dp"
-        android:layout_weight="10"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/key_1"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_2"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_3"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
+        android:layout_weight="1">
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="horizontal"
+        >
 
-        android:layout_width="0dp"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:tag="1"
+                android:id="@+id/key_1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/button" />
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:tag="4"
+                android:id="@+id/key_4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/button" />
+
+
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:tag="7"
+                android:id="@+id/key_7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/button" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:tag="10"
+                android:id="@+id/key_10"
+                app:srcCompat="@drawable/button"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="0dp"
+                android:layout_weight="15"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <ImageView
+                android:tag="2"
+                android:id="@+id/key_2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:layout_weight="15"
+                app:srcCompat="@drawable/button" />
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:tag="5"
+                android:id="@+id/key_5"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                app:srcCompat="@drawable/button" />
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:tag="8"
+                android:id="@+id/key_8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/button" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:tag="11"
+                android:id="@+id/key_11"
+                app:srcCompat="@drawable/button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:layout_weight="15"/>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="10"
+            android:layout_height="match_parent">
+            <ImageView
+                android:tag="3"
+                android:id="@+id/key_3"
+                app:srcCompat="@drawable/button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:layout_weight="15"/>
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:tag="6"
+                android:id="@+id/key_6"
+                app:srcCompat="@drawable/button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:layout_weight="15"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:tag="9"
+                android:id="@+id/key_9"
+                app:srcCompat="@drawable/button"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="0dp"
+                android:layout_weight="15"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:tag="12"
+                android:id="@+id/key_12"
+                app:srcCompat="@drawable/button"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:layout_weight="15"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_weight="10"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/key_4"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_5"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_6"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-           android:layout_weight="15"/>
-    </LinearLayout>
-    <LinearLayout
-
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_weight="10"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/key_7"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_8"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_9"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-    </LinearLayout>
-    <LinearLayout
-
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_weight="10"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/key_10"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_11"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
-        <ImageView
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/key_12"
-            android:background="@color/colorBlue"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"/>
+        >
     </LinearLayout>
 
 
@@ -173,3 +220,9 @@
 
 
 </LinearLayout>
+
+
+
+
+
+
